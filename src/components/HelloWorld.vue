@@ -6,17 +6,19 @@
       <h2 v-if="step.multiple_answer == true">
         #{{ index + 1 }} {{ step.question }}  (plusieurs réponses)
       </h2>
-
       <h2 v-else>
         #{{ index + 1 }} {{ step.question }}  (une réponse)
       </h2>
 
       <p>{{ step.description }}</p>
 
-     <h3 v-if="step.multiple_answer == true" v-for="(answer, answer_index) in step.answers" class="answer"> <input type="checkbox" name="case" value="reponse1" v-model="answer.selected">{{answer.text}} </h3> 
-      
-     <h3 v-if="step.multiple_answer == false" v-for="(answer, answer_index) in step.answers" class="answer"> <input type="radio" name="reponse" :value="answer_index" v-model="step.radio_select">{{answer.text}}  </h3>
+      <div v-if="step.multiple_answer == true">
+        <h3 v-for="(answer, answer_index) in step.answers" :key="'answer'+answer_index+index" class="answer"> <input type="checkbox" name="case" value="reponse1" v-model="answer.selected">{{answer.text}} </h3> 
+      </div>
 
+      <div v-if="step.multiple_answer == false">
+      <h3 v-for="(answer, answer_index) in step.answers" :key="'answer'+answer_index+index" class="answer"> <input type="radio" name="reponse" :value="answer_index" v-model="step.radio_select">{{answer.text}}  </h3>
+      </div>
 
 
     </div>
